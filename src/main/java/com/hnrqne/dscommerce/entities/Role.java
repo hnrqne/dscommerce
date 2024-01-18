@@ -1,35 +1,28 @@
 package com.hnrqne.dscommerce.entities;
 
-import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "tb_category")
-public class Category {
-
+@Table(name = "tb_role")
+public class Role {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	private String authority;
 	
-	private String name;
-	
-	@ManyToMany(mappedBy = "categories")
-	private Set<Product> products = new HashSet<>();
-	
-	public Category() {
+	public Role() {
 	}
-
-	public Category(Long id, String name) {
+	
+	public Role(Long id, String authority) {
 		this.id = id;
-		this.name = name;
+		this.authority = authority;
 	}
 
 	public Long getId() {
@@ -40,21 +33,17 @@ public class Category {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public String getAuthority() {
+		return authority;
 	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public Set<Product> getProducts() {
-		return products;
+	public void setAuthority(String authority) {
+		this.authority = authority;
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(id);
+		return Objects.hash(authority);
 	}
 
 	@Override
@@ -65,7 +54,7 @@ public class Category {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Category other = (Category) obj;
-		return Objects.equals(id, other.id);
+		Role other = (Role) obj;
+		return Objects.equals(authority, other.authority);
 	}
 }
